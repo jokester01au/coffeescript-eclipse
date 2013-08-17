@@ -11,6 +11,7 @@
     <module>csep</module>
     <module>csep.ui</module>
     <module>csep.feature</module>
+    <module>csep.site</module>
   </modules>
 
   <repositories>

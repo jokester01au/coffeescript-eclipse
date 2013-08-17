@@ -110,7 +110,23 @@ You may be [given a warning](https://bitbucket.org/adamschmideg/coffeescript-ecl
 
 # Building
 
-## Building in eclipse
+## Building with Maven / Tycho
+
+To start a headless build using maven, simply run `mvn` in the root of the project. 
+
+## Install from sources
+
+1. `mvn package`  
+2. `npm install http-server -g`  
+3. `http-server csep.site\target\repository -p 8010`
+4. start http://localhost:8010/  
+5. // navigate `http://localhost:8010/` in browser to check  
+5. Help->Install New Software, enter http://localhost:8010/ in Work With  
+
+Run offline if to re-build
+`mvn -o package`
+
+## Building in eclipse (old way)
 
 If you want to contribute to the plugin, here's a quick overview how to setup and build it locally:
 
@@ -122,7 +138,4 @@ If you want to contribute to the plugin, here's a quick overview how to setup an
 
 After these 5 steps, the project should build without errors and you can startup a new eclipse instance and open any .coffee file using the coffeescript editor.
 
-## Building with Maven / Tycho
-
-To start a headless build using maven, simply run `mvn` in the root of the project. 
 

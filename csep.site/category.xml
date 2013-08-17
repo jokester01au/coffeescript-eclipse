@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/csep.feature_0.3.0.qualifier.jar" id="csep.feature" version="0.3.0.qualifier">
+      <category name="tools"/>
+   </feature>
+   <category-def name="tools" label="Tools"/>
+</site>
