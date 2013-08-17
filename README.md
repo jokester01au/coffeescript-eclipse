@@ -7,6 +7,9 @@ Highlights include
  - variable autocompletion in the current namespace
  - autoindent
 
+<a href="http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=1097343" title="Drag and drop into a running Eclipse to install Nodeclipse CoffeeScript Editor">
+  <img src="http://marketplace.eclipse.org/sites/all/modules/custom/marketplace/images/installbutton.png"/>
+</a>
 
 # Status
 > It's aimed at being mostly compatible with the original CoffeeScript project.
@@ -22,11 +25,13 @@ but tell the world that if there will be a person willing to make maintenance re
 and do some refresh (and possibly become project owner),
 we will include CoffeeScript Editor into Nodeclipse distributions.
 
+In August 2013 0.3.0 refreshh version was relased, with node news features, but with maven/tycho build.
+
 ## Extra features
-CoffeeScript is a dyanmic language,
+CoffeeScript is a dynamic language,
  the parser doesn't check the types or even the existence of variables,
  such mismatches are detected at runtime.
-This plugin is based on Xtext which is geared to static languages,
+This plugin is based on XText which is geared to static languages,
  providing some useful tools for dealing with these issues.
 Doing proper type inference for such a flexible language would be difficult,
  but there are some cases where more checking can be done than by the original CoffeeScript parser.
@@ -72,6 +77,9 @@ Getting the value of a deeply nested property is OK.
 
 ## Changelog
 
+- 0.3.0 refresh release
+	- switch to maven/tycho build
+
 <dl>
   <dt>0.2.2</dt>
   <dd>Embed coffeescript in a DSL (see the `example` directory)</dd>
@@ -79,7 +87,36 @@ Getting the value of a deeply nested property is OK.
   <dd>Integrated build: convert coffee code to javascript, and run it</dd>
 </dl>
 
-# Installation
+
+# Building
+
+## Building with Maven / Tycho
+
+To start a headless build using maven, simply run `mvn` in the root of the project. 
+
+## Install from sources
+
+1. `mvn package` or `mvn -o package` for offline re-build
+2. `npm install http-server -g`  
+3. `http-server csep.site\target\repository -p 8010`
+4. // start http://localhost:8010/  
+5. // navigate `http://localhost:8010/` in browser to check  
+5. Help->Install New Software, enter http://localhost:8010/ in Work With field
+
+## Building in eclipse (old way)
+
+If you want to contribute to the plugin, here's a quick overview how to setup and build it locally:
+
+1. Install [http://www.eclipse.org/Xtext/download.html](Xtext) / Version 2.1.x
+2. Clone this repository
+3. Import all projects into your workspace
+4. Right click `csep/src/csep/CoffeeScript.xtext/CoffeeScript.xtext` -> Run as ... -> Generate Xtext language artifacts
+5. Right click `example/csep.example.cake/src/csep/example/cake/Cakefile.xtext` -> Run as .. -> Generate Xtext language artifacts
+
+After these 5 steps, the project should build without errors and you can startup a new eclipse instance and open any .coffee file using the coffeescript editor.
+
+
+### Installation  (old way 0.2.2)
 
 There is [quick installer on Marketplace](http://marketplace.eclipse.org/content/coffeescript-editor-quick-installer).
  Below is original details instructions:
@@ -106,36 +143,4 @@ You may be [given a warning](https://bitbucket.org/adamschmideg/coffeescript-ecl
   [xtext_download]: http://www.eclipse.org/Xtext/download.html
   [csep_bitbucket_download]: https://bitbucket.org/adamschmideg/coffeescript-eclipse/downloads
   [csep_github]: https://github.com/adamschmideg/coffeescript-eclipse 
-
-
-# Building
-
-## Building with Maven / Tycho
-
-To start a headless build using maven, simply run `mvn` in the root of the project. 
-
-## Install from sources
-
-1. `mvn package`  
-2. `npm install http-server -g`  
-3. `http-server csep.site\target\repository -p 8010`
-4. start http://localhost:8010/  
-5. // navigate `http://localhost:8010/` in browser to check  
-5. Help->Install New Software, enter http://localhost:8010/ in Work With  
-
-Run offline if to re-build
-`mvn -o package`
-
-## Building in eclipse (old way)
-
-If you want to contribute to the plugin, here's a quick overview how to setup and build it locally:
-
-1. Install [http://www.eclipse.org/Xtext/download.html](Xtext) / Version 2.1.x
-2. Clone this repository
-3. Import all projects into your workspace
-4. Right click `csep/src/csep/CoffeeScript.xtext/CoffeeScript.xtext` -> Run as ... -> Generate Xtext language artifacts
-5. Right click `example/csep.example.cake/src/csep/example/cake/Cakefile.xtext` -> Run as .. -> Generate Xtext language artifacts
-
-After these 5 steps, the project should build without errors and you can startup a new eclipse instance and open any .coffee file using the coffeescript editor.
-
 
