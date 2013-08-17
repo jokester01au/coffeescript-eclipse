@@ -6,12 +6,13 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
+            id="csep.CoffeeScript"
+            name="%editor.name"
             class="csep.ui.CoffeeScriptExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="coffee"
-            id="csep.CoffeeScript"
-            name="%editor.name">
+            icon="icons/coffee.png">
         </editor>
     </extension>
     <extension
