@@ -7,16 +7,17 @@ Highlights include
  - variable autocompletion in the current namespace
  - autoindent
 
+> It's aimed at being mostly compatible with the original CoffeeScript project.
+>There are some extra features and some missing,
+ but you probably (and hopefully) won't notice the difference in everyday use.
+
 <a href="http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=1097343" title="Drag and drop into a running Eclipse to install Nodeclipse CoffeeScript Editor">
   <img src="http://marketplace.eclipse.org/sites/all/modules/custom/marketplace/images/installbutton.png"/>
 </a>
 
 # Status
-> It's aimed at being mostly compatible with the original CoffeeScript project.
->There are some extra features and some missing,
- but you probably (and hopefully) won't notice the difference in everyday use.
 
-<b>Looking for owner<b>
+<b>Looking for owner<b> and DYI mode
 
 coffeescript-eclipse has not been updated for a year.
 Paul has contacted Adam Schmideg, the original author at FORMULA 400, and got blessing for Nodeclipse
@@ -25,7 +26,7 @@ but tell the world that if there will be a person willing to make maintenance re
 and do some refresh (and possibly become project owner),
 we will include CoffeeScript Editor into Nodeclipse distributions.
 
-In August 2013 0.3.0 refreshh version was relased, with node news features, but with maven/tycho build.
+In August 2013 0.3.0 refresh version was released, with node news features, but with maven/tycho build.
 
 ## Extra features
 CoffeeScript is a dynamic language,
