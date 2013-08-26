@@ -26,7 +26,7 @@ but tell the world that if there will be a person willing to make maintenance re
 and do some refresh (and possibly become project owner),
 we will include CoffeeScript Editor into Nodeclipse distributions.
 
-In August 2013 0.3.0 refresh version was released, with node news features, but with maven/tycho build.
+In August 2013 0.3.0 refresh version was released, with no new features, except for icon and igration maven/tycho build.
 
 ## Extra features
 CoffeeScript is a dynamic language,
