@@ -1,3 +1,6 @@
+
+# CoffeeScript Eclipse Plugin
+
 This is a project to provide an Eclipse plugin for [CoffeeScript][coffeescript], using [Xtext][xtext].
 Development uses Xtext 2.1.
 It works as a regular Eclipse plugin (see Installation for details).
@@ -15,7 +18,7 @@ Highlights include
   <img src="http://marketplace.eclipse.org/sites/all/modules/custom/marketplace/images/installbutton.png"/>
 </a>
 
-# Status
+## Status
 
 <b>Looking for owner<b> and DYI mode
 
@@ -27,6 +30,37 @@ and do some refresh (and possibly become project owner),
 we will include CoffeeScript Editor into Nodeclipse distributions.
 
 In August 2013 0.3.0 refresh version was released, with no new features, except for icon and igration maven/tycho build.
+
+Old issues <https://github.com/adamschmideg/coffeescript-eclipse/issues?state=open>, and <https://bitbucket.org/adamschmideg/coffeescript-eclipse/issues?status=new&status=open>
+
+**If you found a bug, send Pull Request.**
+
+If you reference any issues in this repository add "Nodeclipse#", otherwise GitHub searches
+ in <https://github.com/adamschmideg/coffeescript-eclipse> repository.
+
+## Plans
+
+### 0.4 
+
+- make grouping and error warning as optional and disable by default (Reason: there are a lot of tiny problem, false error detection.
+ They are distracting developer.)
+
+## Changelog
+
+Check [devjournal.md](devjournal)
+
+- 0.3.0 refresh release
+	- switch to maven/tycho build
+	- coffee icon
+
+<dl>
+  <dt>0.2.2</dt>
+  <dd>Embed coffeescript in a DSL (see the `example` directory)</dd>
+  <dt>Planned next release</dt>
+  <dd>Integrated build: convert coffee code to javascript, and run it</dd>
+</dl>
+
+
 
 ## Extra features
 CoffeeScript is a dynamic language,
@@ -75,19 +109,6 @@ Getting the value of a deeply nested property is OK.
     # This is working
     borrow(my.secret.money)
     borrowed = my.secret.money
-
-## Changelog
-
-- 0.3.0 refresh release
-	- switch to maven/tycho build
-
-<dl>
-  <dt>0.2.2</dt>
-  <dd>Embed coffeescript in a DSL (see the `example` directory)</dd>
-  <dt>Planned next release</dt>
-  <dd>Integrated build: convert coffee code to javascript, and run it</dd>
-</dl>
-
 
 # Building
 

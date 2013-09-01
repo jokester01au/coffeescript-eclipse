@@ -1,5 +1,11 @@
 
-# Display parse tree for debugging purposes
+# Dev Journal
+
+Started by Adam Schmideg
+
+## part 1
+
+### Display parse tree for debugging purposes
 
  - Trying [Implement toString with Xtext's Serializer][1].
    The parse tree I get is flat without indentation when not doing the `toString` replacement magic,
@@ -11,25 +17,25 @@
       The serializer approach doesn't work, because [it's supposed to output a parseable string][2]
     - Done.  See `csep.parser.Helper.stringify`.
 
-# Overriding `nextToken()` in Lexer is not enough.
+### Overriding `nextToken()` in Lexer is not enough.
   The parser seems to use only the first token when building the AST.
 
  - There are some differences between the token returned by the internal lexer and the token by the aptana lexer.
    The differences include: whitespace handling; EOF; type/id of operators.
  - The difference of whitespace and EOF handling seem to cause no problem.
 
-# Why is the type of operators different in BeaverToken?
+### Why is the type of operators different in BeaverToken?
 
  - A literal '+' within a rule is not the same as using PLUS within the same rule.
    (Note: the aptana lexer returns a MATH token both for '\*' and for '/')
 
-# How to vizualize the LALR grammar of coffeescript?
+### How to vizualize the LALR grammar of coffeescript?
 
  - I asked about [visualizing LALR grammar] on Stackoverflow
  - I found [GOLD parser][4] which has an IDE, but runs only on Windows.
      But I may check it out.
 
-# Learning ANTLR
+### Learning ANTLR
 
   * Tried to use the generated python target, but it seemed difficult on
    Ubuntu: there is no python binding for antlr3, the java version
@@ -49,7 +55,7 @@
    right-hand side of `expression`.
  * I'm not sure how close I can stay to the original LR grammar.
 
-# Convert Antlr grammar to Xtext
+### Convert Antlr grammar to Xtext
 
 See [Convert Antlr grammar to Xtext][6]
 
@@ -66,25 +72,25 @@ See [Convert Antlr grammar to Xtext][6]
  * Optionally you may want to capitalize the rule names to follow the
   java convention.
 
-# Running headless with make
+### Running headless with make
 
   * I'm going to abandod this because eclipse packages are versioned with a build date too which is difficult to handle in a Makefile.
   * Possible (and time-consuming) solutions are
     * use some dependency management tool, such as ivy
     * do some bash scripting magic to find foo-[version]-v[build-date].jar and copy it as foo-[version].jar
 
-# Terminals in a separate file.
+### Terminals in a separate file.
   Well, [I've struggled with it][7].  Abandoned, it's not worth the effort.
 
-# Partial parsing instead of failure
+### Partial parsing instead of failure
 `1 = 2` should fail, but it the first token gets parsed, the rest discarded without any error message.
 
 Done, using `org.eclipse.xtext.junit.AbstractXtextTests.getModelAndExpect()`
 
-# How is THEN handled?
+### How is THEN handled?
 Fortunately, it seems to be handled by the lexer, making it a block
 
-# Add postfix conditional.
+### Add postfix conditional.
 The problem is "num = 2 if even" is parsed as an assignment "num = 2", then the next IF token is considered an error.
 It may be handled the same way as the existence operator.
 
@@ -108,7 +114,7 @@ I don't know why unary expression is included in the chain, and not in the Prima
     The referrred `[Class]` will not create a new class name, but expects an existing name
   * Syntactic predicate denoted as `=>`.
 
-# Debugging Xtext grammar with Antlrworks
+### Debugging Xtext grammar with Antlrworks
 
   * The grammar generated doesn't compile, it's looking for a class
    `DebugAbstractInternalAntlrParser` which cannot be found anywhere
@@ -120,7 +126,7 @@ I don't know why unary expression is included in the chain, and not in the Prima
     gets generated which can be opened and debugged with Antlrworks
     seamlessly
 
-# Warning: "Decision can match input such as RULE\_IF using multiple alternatives: 1, 2"
+### Warning: "Decision can match input such as RULE\_IF using multiple alternatives: 1, 2"
 
   * Before the previous commit it almost disappeared, then it came back.
   * The answer to this [Stackoverflow question][9] says, you can set
@@ -135,7 +141,7 @@ I don't know why unary expression is included in the chain, and not in the Prima
   I don't know how to achieve this in the Xtext grammar.
   I don't know why this fixes the Antlr grammar, either.
 
-# Handle dynamic variables.
+### Handle dynamic variables.
 It's more difficult than it first seemed, see [my Stackoverflow question about handling dynamic variables][10]
 
 * There is a difference between the generated debug grammar and the
@@ -164,7 +170,7 @@ It's more difficult than it first seemed, see [my Stackoverflow question about h
 
 Unfortunately, it gives the same non-LL(\*) decision error.
 
-# Linking.
+### Linking.
 Introduced `IdRef` and a dummy scoping mechanism.
 It shuts up linking problems and enables most coffeescript constructs.
 The only drawback for the moment seems to be that variables cannot be reassigned.
@@ -175,7 +181,7 @@ and http://zarnekow.blogspot.com/2010/06/customizing-error-messages-in-xtext-10.
 * Testing with automatically generated sentences fed to `coffee`
   See my question: http://stackoverflow.com/questions/8478320/generate-syntactically-correct-sentences-from-an-antlr-grammar
 
-# Syntax highlight of keywords.
+### Syntax highlight of keywords.
 It should be automatic, but it matters how terminals are defined in
 the grammar, consider this:
 
@@ -193,14 +199,14 @@ This is what I just started.
 `Regex` can be configured in the preferences now, but it doesn't get
 highlighted in the source code.
 
-# Tricky highlight issues
+### Tricky highlight issues
 
  - how to handle 'then' which doesn't get a token, but is replaced with
    a block?
  - how to handle string interpolation?  `"before #{ x } after"` is
    tokenized as `[( (] [STRING "before "] [+ +] [IDENTIFIER x] [+ +] [STRING " after"] [) )]`
 
-# Variable scoping.  The strategy is
+### Variable scoping.  The strategy is
 
  - The left-hand side of assignment contains `Id`.
    It causes a `Duplicate ForValue` error in case of reassignment.
@@ -215,7 +221,7 @@ highlighted in the source code.
    It wouldn't accept syntactically correct, but erroneous
    expressions, such as `[a+1] = 3`
 
-# Syntax highlight of comments
+### Syntax highlight of comments
 Xtext uses `TokenScanner` when doing syntax highlighting which seems
  to ignore the lexer and to use the xtext grammar directly.
 I asked about it: http://www.eclipse.org/forums/index.php/m/772060/#msg\_772060
@@ -224,7 +230,7 @@ I may check out semantic highlighting instead.
 It was easier to change the terminals in the xtext grammar and stay
  with the current lexical highlighter.
 
-# Display tokenization errors correctly.
+### Display tokenization errors correctly.
 An exception may be thrown either by the scanner, or by the rewriter.
 In the first case, we have a stream of valid tokens up to the point
 where the exception was thrown.
@@ -238,7 +244,7 @@ XtextResource.
 The errors in XtextResource are cleared in the parsing phase, so
 adding a Diagnostic error by the lexer would be lost.
 
-# Issues
+### Issues
 
  - One-character long string not recognized in editor -- Done
  - Double quotation mark within singly quoted string -- Done
@@ -254,9 +260,9 @@ adding a Diagnostic error by the lexer would be lost.
  - Use `.coffee` as file extension -- Done
  - Accept empty file
 
-# The file has to be modified to activate xtext grammar check
+### The file has to be modified to activate xtext grammar check
 
-# Problems with tokens got from Aptana scanner
+### Problems with tokens got from Aptana scanner
 
  - It uses short numbers internally which easily overflows, resulting
    token positions restarted after 4095 -- oops, not true, it simply
@@ -268,7 +274,7 @@ adding a Diagnostic error by the lexer would be lost.
  - It doesn't seem to keep track of line number and positions within
    line
 
-# The case of the ugly StringIndexOutOfBoundsException:
+### The case of the ugly StringIndexOutOfBoundsException:
   When an issue is raised, its content is calculated from the whole
   text indexed by the token where occurred.
   But the whole text is calculated by taking the input char stream and
@@ -277,7 +283,7 @@ adding a Diagnostic error by the lexer would be lost.
   and we'll get a shorter full text.
   So a substring with the proper indexes will fail.
 
-# Most annoying issue:
+### Most annoying issue:
   The editor works inconsistently.
 
   - Sometimes `No viable alternative at EOF` for an empty or almost
@@ -286,9 +292,9 @@ adding a Diagnostic error by the lexer would be lost.
   - Saving a file removes warnings
   - The warnings are not shown in the `Problems` window
 
-# Hovering sometimes throws an NPE, maybe when I hover over a missing crossref
+### Hovering sometimes throws an NPE, maybe when I hover over a missing crossref
 
-# Scoping, second round.
+### Scoping, second round.
 Reading this series of posts: http://blogs.itemis.de/stundzig/archives/773
 I just realized that functions have dynamic scoping, but loops seem to
 have lexical scoping.
@@ -323,18 +329,18 @@ Probably interdependent issues
   - Saving or modifying a file may change whether or not problems are
     shown in the editor
 
-# An ugly bug that took me hours to hunt down
+### An ugly bug that took me hours to hunt down
 When there's an error in the file, any change to the file will generate a number of errors without any message.
 This is due to the bug that somewhere deep down trailing zero bytes are appended to the source text to be parsed.
 My hunch is it's related to replacing the text from the previous parse result using a replace region.
 I couldn't find the exact source of the problem, but could make a simple workaround.
 
-# Auto-completion
+### Auto-completion
 The tricky thing is: when we try to give a completion for `Math.`,
 the context is an IdRef, but it can't find any referee named `Math`.
 So we have no name for the lookup.
 
-# String interpolation mystery
+### String interpolation mystery
 The right-hand side of `first` and `second` in the following snippet should be parsed the same,
 because the same tokens are generated.
 
@@ -345,7 +351,7 @@ because the same tokens are generated.
 But in the second case, a warning is given that the reference cannot be found.
 There is also an offset problem here, the warning message is `Couldn't resolve reference to Id '#{na'`
 
-# Annoying editor bug
+### Annoying editor bug
 This is how I could reproduce a problem most of the times (it may depend on typing speed).
 Enter the following snippet into an empty file
 
@@ -370,9 +376,9 @@ The result is: when the underlying parser gets the whole stream as string,
 A related problem is that the scanner added and removed some whitespaces to make its job easier,
  but it didn't fix the offsets accordingly.
 
-# Respond to bug reports.
+### Respond to bug reports.
 
-# Resolution warning.  The minimal snippet to reproduce it is
+### Resolution warning.  The minimal snippet to reproduce it is
 
      a = 1
      #remark
@@ -388,13 +394,13 @@ Parse element with wrong offsets are produced in `XtextResource.update` after ca
 Workaround: don't use partialParser, because it seems to be responsible for the wrong offsets.
 This may result in some performance penalty for larger files.
 
-# Asked about issues at Eclipse forum
+### Asked about issues at Eclipse forum
 
   - [Debug grammar generation gives error but seems to work](http://www.eclipse.org/forums/index.php/m/791928/)
   - [Partial parsing can't resolve some references](http://www.eclipse.org/forums/index.php/m/791944/) 
   - I got some answers -- or clarifying questions rather that I replied to.
 
-# Installable plugin
+### Installable plugin
 I followed the instructions on
  [How to create an update site](http://wiki.eclipse.org/FAQ_How_do_I_create_an_update_site_\(site.xml\)%3F)
 Now all you have to do is
@@ -406,15 +412,15 @@ Now all you have to do is
 
 The `csep.update` directory will be populated with the required artifacts.
 
-# Directories are cleaned by `org.eclipse.emf.mwe.utils.DirectoryCleaner` before generating source
+### Directories are cleaned by `org.eclipse.emf.mwe.utils.DirectoryCleaner` before generating source
 
 The cleaner ignores `.csvignore` files by default, so I put such files into `xxx-gen` folders
  as a workaround to have empty directories (not tracked by mercurial).
 
-# This whole plugin development with xtext looks a pile of undocumented, overcomplicated crap
+### This whole plugin development with xtext looks a pile of undocumented, overcomplicated crap
 My question is http://www.eclipse.org/forums/index.php/m/795597/
 
-# Eclipse plugin versioning.
+### Eclipse plugin versioning.
 I want to append date to version number automatically.
 It would make plugin development easier: no need to remove and reinstall it, just update it.
 
@@ -433,14 +439,14 @@ It will keep the commited site.xml file intact from timestamps.
 
 Asked http://stackoverflow.com/questions/9535064/
 
-# Problem with generated folders again
+### Problem with generated folders again
 Eclipse gives a warning "the resource is a duplicate of ..."
 I added some comment to the `.csvignore` files causing the problem -- no change.
 I followed the advice of http://www.stevenmarkford.com/solution-to-eclipse-warning-with-svn-the-resource-is-a-duplicate-of-and-was-not-copied-to-the-output-folder/
  -- no change.
 Leaving it as is, for now.
 
-# Update site
+### Update site
 It's difficult to find a hosting site, because download folders are required.
 Most open source hosting sites don't provide this.
 The only exception may be Sourceforge, but I haven't checked it, I don't want to register.
@@ -464,7 +470,7 @@ It has no ability to create download directories, either, so I'll have to put it
   [11]: http://stackoverflow.com/questions/8438755/stripping-actions-from-antlr-grammar-changes-its-parsing-algorithm
   [12]: http://antlrv3ide.sourceforge.net/
 
-# Create a coffee plugin so the language can be extended
+### Create a coffee plugin so the language can be extended
 Cakefile language is almost the same as coffee with a single addition: it has `task` as a predefined function.
 It requires two steps to make it work
 
@@ -523,7 +529,7 @@ It seems to fix the problem, the coffeescript genmodel is now registered correct
   [xbase]: http://dev.eclipse.org/viewcvs/viewvc.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.xbase/?root=Modeling_Project
   [xtext_faq]: http://wiki.eclipse.org/Xtext/FAQ#How_do_I_load_my_model_in_a_standalone_Java_application.C2.A0.3F
 
-# Some warnings probably not to be fixed
+### Some warnings probably not to be fixed
 "Discouraged access: The type CoffeeScriptActivator is not accessible due to restriction on required project csep.ui" in
 in `csep.tests/src-gen/csep/CoffeeScriptUiInjectorProvider.java`
 It's generated code, I don't know how to fix it.
@@ -546,7 +552,7 @@ One warning I fixed: Java execution environment warning.
   - Right click on `JRE System Library` in the package explorer
   - Select `JavaSE-1.6` from the options
 
-# Serialization
+### Serialization
 My hunch is that the issue https://bitbucket.org/adamschmideg/coffeescript-eclipse/issue/7 is related to serialization.
 Partly, because a NPE is involved.
 If I omit serialization from the mwe2 workflow, the generation works fine, but the above issue is present.
@@ -554,7 +560,7 @@ If I I have serialization in the workflow, it writes an error: "constraint is IN
  (it's written by `org.eclipse.xtext.serializer.analysis.GrammarConstraintProvider.getConstraints`).
 If I even set `generateDebugData` in it, a NPE is thrown.
 
-# Use coffee lexer for cakefile
+### Use coffee lexer for cakefile
 The generated tokens seem to have a different integer value for coffee and cakefile.
 I implemented a mindless mapping, see `csep.example.cake.parser.TokenTypeMapper`.
 It maps between coffee and cakefile tokens (both used in different cases).
@@ -562,21 +568,21 @@ It maps between coffee and cakefile tokens (both used in different cases).
 Map grammar-specific identifiers ('task' in this case) are mapped to an appropriate terminal rule by
  `csep.example.cake.parser.CustomLexer.nextToken`
 
-# Implicit parameter
+### Implicit parameter
 I want to use options either explicitly, or implicitly:
 
-    # Implicit
+    ### Implicit
     task "foo", "desc", ->
-      # OK, implicit variable
+      ### OK, implicit variable
       options.foo
-      # Invalid, reference to unknown variable
+      ### Invalid, reference to unknown variable
       opts.foo
 
-    # Explicit
+    ### Explicit
     task "foo", "desc", (opts) ->
-      # OK
+      ### OK
       opts.foo
-      # Invalid when options provided explicitly
+      ### Invalid when options provided explicitly
       options.foo
 
 I'm not even sure if these links are relevant
@@ -584,7 +590,7 @@ I'm not even sure if these links are relevant
   - https://bugs.eclipse.org/bugs/show\_bug.cgi?id=326298
   - http://www.eclipse.org/Xtext/documentation/2\_0\_0/020-grammar-language.php#customPostProcessing
 
-## Change generated constructor in postprocessing
+#### Change generated constructor in postprocessing
 Not sure if it works, this phase may come later than scoping/linking.
 Anyway, I'm trying to change the constructor of `TaskDeclaration` to give a default value to `options`.
 Some examples
@@ -594,7 +600,7 @@ Some examples
 
 Well, the postprocessing approach probably wouldn't work, because it doesn't take care of scoping.
 
-## Custom scoping
+#### Custom scoping
 I added custom declarative scoping.
 I have two problems with it
 
@@ -604,19 +610,19 @@ I have two problems with it
   - What scope should I return for an implicit variable?
     My question at the Eclipse forum: http://www.eclipse.org/forums/index.php/mv/msg/309869/821018/#msg_821018
 
-## Consecutive assignments as nested scopes
+#### Consecutive assignments as nested scopes
 This would handle re-assignment correctly.
 
-    a = 1         # scope 1
-    b = 2         # scope 2
-    doSomething() # same scope as before
-    a = a + 1     # new scope shadowing variable `a`
-    useVar(a)     # same scope as before, using re-assigned `a`
+    a = 1         ### scope 1
+    b = 2         ### scope 2
+    doSomething() ### same scope as before
+    a = a + 1     ### new scope shadowing variable `a`
+    useVar(a)     ### same scope as before, using re-assigned `a`
 
 This may more elegant than the way it's currently implemented,
  but it can wait.
 
-## Error in editor: \<some uri\> contains a dangling reference
+#### Error in editor: \<some uri\> contains a dangling reference
 I implemented custom scoping.
 Now the above error is shown only in the editor, but the test case with implicit variable runs without any problem.
 I realized that `scope\_Id` method doesn't have to know the name of the id.
@@ -648,22 +654,33 @@ So I choose to override `updateInternalState` and add implicit variables to the 
 
 This last approach seems to work.
 
-# Include source in plugin bundle
+### Include source in plugin bundle
 There seems to be two ways to do it, but none of them works for me:
 
   - http://help.eclipse.org/indigo/index.jsp?topic=%2Forg.eclipse.pde.doc.user%2Ftasks%2Fpde\_individual\_source.htm
   - http://wiki.eclipse.org/PDEBuild/Individual\_Source\_Bundles
 
-# Timestamp issue
+### Timestamp issue
 See https://bitbucket.org/adamschmideg/coffeescript-eclipse/issue/6
 It's caused by the missing `last-modified` entry in the http header returned by the googlecode mercurial front-end.
 Set to `wontfix`.
 
-# Use branches on github
+### Use branches on github
 I don't see an easy way to convert hg branches to git branches.
 It would involve creating a hg bookmark for each hg branch which is otherwise discouraged.
 So I'm going to use a single master branch on github until a better solution is found.
 
-# Markdown in README
+### Markdown in README
 Bitbucket uses `python-markdown` and doesn't support inline html or extensions of python-markdown.
 So I can see no way to have proper definition lists in the README file.
+
+## part 2
+
+### Maven Tycho
+
+mvn -Dtycho.mode=maven org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=NEW_VERSION-SNAPSHOT
+
+mvn -Dtycho.mode=maven org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=0.4.0-SNAPSHOT
+
+
+
