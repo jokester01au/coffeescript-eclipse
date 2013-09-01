@@ -19,9 +19,8 @@
   <modules>
     <module>csep</module>
     <module>csep.ui</module>
-    <!--
+    <!-- org.junit4 was renamed to org.junit in Kepler  -->
     <module>csep.tests</module>
-      -->
     <module>csep.feature</module>
     <module>csep.site</module>
   </modules>

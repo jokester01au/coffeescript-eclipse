@@ -689,6 +689,10 @@ Found on [StackOverflow](http://stackoverflow.com/questions/2848687/how-to-keep-
 See alos <https://issues.sonatype.org/browse/TYCHO-214> OSGi release procedures and best practices 
 open as of 2013-09-01
 
+### Travis CI
+
+<http://about.travis-ci.org/docs/user/languages/java/>
+
 
 
 
