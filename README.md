@@ -1,6 +1,8 @@
 
 # CoffeeScript Eclipse Plugin
 
+[![Build Status](https://secure.travis-ci.org/Nodeclipse/coffeescript-eclipse.png)](http://travis-ci.org/Nodeclipse/coffeescript-eclipse)
+
 This is a project to provide an Eclipse plugin for [CoffeeScript][coffeescript], using [Xtext][xtext].
 Development uses Xtext 2.1.
 It works as a regular Eclipse plugin (see Installation for details).

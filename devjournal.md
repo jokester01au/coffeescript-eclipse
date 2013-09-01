@@ -691,7 +691,10 @@ open as of 2013-09-01
 
 ### Travis CI
 
-<http://about.travis-ci.org/docs/user/languages/java/>
+Setting up was straight-forward. As <https://travis-ci.org/first_sync> says:
+
+- got to <https://travis-ci.org/profile/Nodeclipse>
+- add simple `.travis.yml` with 1 line `language: java`, check <http://about.travis-ci.org/docs/user/languages/java/>
 
 
 
