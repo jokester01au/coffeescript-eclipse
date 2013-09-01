@@ -2,7 +2,7 @@
 <feature
       id="csep.feature"
       label="CoffeeScript Editor"
-      version="0.3.0.qualifier">
+      version="0.4.0.qualifier">
 
    <description url="http://www.nodeclipse.org/coffeescript">
       Nodeclipse CoffeeScript Editor

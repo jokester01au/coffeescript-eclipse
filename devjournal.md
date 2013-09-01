@@ -680,7 +680,15 @@ So I can see no way to have proper definition lists in the README file.
 
 mvn -Dtycho.mode=maven org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=NEW_VERSION-SNAPSHOT
 
-mvn -Dtycho.mode=maven org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=0.4.0-SNAPSHOT
+`mvn -Dtycho.mode=maven org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=0.4.0-SNAPSHOT`
+
+Then update `csep.site\category.xml` manually
+
+Found on [StackOverflow](http://stackoverflow.com/questions/2848687/how-to-keep-plug-in-manifest-version-and-pom-version-in-sync-in-maven-with-tycho)
+
+See alos <https://issues.sonatype.org/browse/TYCHO-214> OSGi release procedures and best practices 
+open as of 2013-09-01
+
 
 
 
