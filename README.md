@@ -49,7 +49,7 @@ If you reference any issues in this repository add "Nodeclipse#", otherwise GitH
 
 ## Changelog
 
-Check [devjournal.md](devjournal)
+Check [devjournal.md](https://github.com/Nodeclipse/coffeescript-eclipse/blob/master/devjournal.md)
 
 - 0.3.0 refresh release
 	- switch to maven/tycho build
