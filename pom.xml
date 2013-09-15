@@ -7,58 +7,145 @@
   <version>0.4.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   
-  <prerequisites>
-    <maven>3.0</maven>
-  </prerequisites>
-  
-  <properties>
-    <tycho-version>0.18.1</tycho-version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+	<!-- Information block, used within maven site 
+	More Project Information http://maven.apache.org/pom.html -->
+	<name>coffeescript-eclipse (parent)</name>
+	<description>
+		CoffeeScript Editor for Eclipse
+	</description>
+    <organization>
+    	<name>Nodeclipse organization</name>
+    	<url>http://www.nodeclipse.org/</url>
+    </organization>
+	<!-- http://maven.apache.org/scm/git.html -->
+	<scm>
+		<url>https://github.com/nodeclipse/coffeescript-eclipse/</url>
+		<connection>scm:git:https://github.com/Nodeclipse/coffeescript-eclipse.git</connection>
+		<developerConnection>scm:git:https://github.com/Nodeclipse/coffeescript-eclipse.git</developerConnection>
+	</scm>
+    <issueManagement>
+    	<system>GitHub</system>
+    	<url>https://github.com/nodeclipse/coffeescript-eclipse/issues</url>
+    </issueManagement>
+    <ciManagement>
+    	<system>Travis CI</system>
+    	<url>http://travis-ci.org/Nodeclipse/coffeescript-eclipse</url>
+    </ciManagement>    
+	<developers>
+		<developer>
+			<id>PaulVI</id>
+			<name>Paul Verest</name>
+			<email>paul.verest@live.com</email>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+	</developers>
+	<contributors>
+	</contributors>
 
-  <modules>
-    <module>csep</module>
-    <module>csep.ui</module>
-    <!-- org.junit4 was renamed to org.junit in Kepler  -->
-    <module>csep.tests</module>
-    <module>csep.feature</module>
-    <module>csep.site</module>
-  </modules>
 
-  <repositories>
-   <repository>
-     <id>kepler</id>
-     <layout>p2</layout>
-     <url>http://download.eclipse.org/releases/kepler</url>
-   </repository>	
+	<prerequisites>
+		<maven>3.0</maven>
+	</prerequisites>
 
-   <repository>
-     <id>xtext</id>
-     <layout>p2</layout>
-     <url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/</url>
-   </repository>  
+	<properties>
+		<tycho-version>0.18.1</tycho-version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
 
-  </repositories>
+	<modules>
+		<module>csep</module>
+		<module>csep.ui</module>
+		<!-- org.junit4 was renamed to org.junit in Kepler -->
+		<module>csep.tests</module>
+		<module>csep.feature</module>
+		<module>csep.site</module>
+	</modules>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-maven-plugin</artifactId>
-        <version>${tycho-version}</version>
-        <extensions>true</extensions>
-      </plugin>
-      <plugin>
-          <groupId>org.eclipse.tycho</groupId>
-          <artifactId>tycho-compiler-plugin</artifactId>
-          <version>${tycho-version}</version>
-          <configuration>
-              <source>1.6</source>
-              <target>1.6</target>
-          </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  
+	<repositories>
+		<repository>
+			<id>kepler</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/releases/kepler</url>
+		</repository>
+		<repository>
+			<id>xtext</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/</url>
+		</repository>
+	</repositories>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-compiler-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<environments>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+
+			<!-- mvn site -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.3</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.doxia</groupId>
+						<artifactId>doxia-module-markdown</artifactId>
+						<version>1.4</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			
+		</plugins>
+  	</build>
 
 </project>

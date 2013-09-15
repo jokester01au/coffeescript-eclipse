@@ -167,7 +167,7 @@ From base folder just run `mvn package`. Run offline when to re-build `mvn clean
 3. <kbd>Add...</kbd>
 4. <kbd>Archive...</kbd>
 5. Insert copied string into name and path.  
- E.g. `C:\Users\pverest\git\nodeclipse-056\org.nodeclipse.site\target\org.nodeclipse.site-0.5.0-SNAPSHOT.zip`
+ E.g. `C:\Users\pverest\git\coffeescript-eclipse\csep.site\target\csep.site-0.4.0-SNAPSHOT.zip`
  
 For the next time just select the zip entry from Work With drop-down list. 
 
