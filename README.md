@@ -2,9 +2,12 @@
 # CoffeeScript Eclipse Plugin
 
 [![Build Status](https://secure.travis-ci.org/Nodeclipse/coffeescript-eclipse.png)](http://travis-ci.org/Nodeclipse/coffeescript-eclipse)
+<a href="http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=1097343" title="Drag and drop into a running Eclipse to install Nodeclipse CoffeeScript Editor">
+  <img src="http://marketplace.eclipse.org/sites/all/modules/custom/marketplace/images/installbutton.png"/>
+</a>
 
 This is a project to provide an Eclipse plugin for [CoffeeScript][coffeescript], using [Xtext][xtext].
-Development uses Xtext 2.1.
+Development uses Xtext 2.1 (TODO update to the latest 2.4.3).
 It works as a regular Eclipse plugin (see Installation for details).
 Highlights include
 
@@ -16,13 +19,9 @@ Highlights include
 >There are some extra features and some missing,
  but you probably (and hopefully) won't notice the difference in everyday use.
 
-<a href="http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=1097343" title="Drag and drop into a running Eclipse to install Nodeclipse CoffeeScript Editor">
-  <img src="http://marketplace.eclipse.org/sites/all/modules/custom/marketplace/images/installbutton.png"/>
-</a>
-
 ## Status
 
-<b>Looking for owner<b> and DYI mode
+<b>Looking for owner<b> and DIY mode
 
 coffeescript-eclipse has not been updated for a year.
 Paul has contacted Adam Schmideg, the original author at FORMULA 400, and got blessing for Nodeclipse
@@ -31,7 +30,7 @@ but tell the world that if there will be a person willing to make maintenance re
 and do some refresh (and possibly become project owner),
 we will include CoffeeScript Editor into Nodeclipse distributions.
 
-In August 2013 0.3.0 refresh version was released, with no new features, except for icon and igration maven/tycho build.
+In August 2013 0.3.0 refresh version was released, with no new features, except for icon and migration to maven/tycho build.
 
 Old issues <https://github.com/adamschmideg/coffeescript-eclipse/issues?state=open>, and <https://bitbucket.org/adamschmideg/coffeescript-eclipse/issues?status=new&status=open>
 
@@ -40,31 +39,10 @@ Old issues <https://github.com/adamschmideg/coffeescript-eclipse/issues?state=op
 If you reference any issues in this repository add "Nodeclipse#", otherwise GitHub searches
  in <https://github.com/adamschmideg/coffeescript-eclipse> repository.
 
-## Plans
+## Details
 
-### 0.4 
+### Extra features
 
-- make grouping and error warning as optional and disable by default (Reason: there are a lot of tiny problem, false error detection.
- They are distracting developer.)
-
-## Changelog
-
-Check [devjournal.md](https://github.com/Nodeclipse/coffeescript-eclipse/blob/master/devjournal.md)
-
-- 0.3.0 refresh release
-	- switch to maven/tycho build
-	- coffee icon
-
-<dl>
-  <dt>0.2.2</dt>
-  <dd>Embed coffeescript in a DSL (see the `example` directory)</dd>
-  <dt>Planned next release</dt>
-  <dd>Integrated build: convert coffee code to javascript, and run it</dd>
-</dl>
-
-
-
-## Extra features
 CoffeeScript is a dynamic language,
  the parser doesn't check the types or even the existence of variables,
  such mismatches are detected at runtime.
@@ -85,7 +63,8 @@ It works within string interpolation, too, so the next snippet will also give a 
 
 Note that the `console` variable won't cause any warning, it's handled as a built-in variable.
 
-## Incompatibilities
+### Incompatibilities
+
 The plugin handles properly most language constructs,
  including all examples in the coffeescript documentation folder.
 There are two cases it cannot handle, though, post-increment and
@@ -112,15 +91,89 @@ Getting the value of a deeply nested property is OK.
     borrow(my.secret.money)
     borrowed = my.secret.money
 
-# Building
+## Installation
 
-## Building with Maven / Tycho
+in a word: drag-and-drop
+<a href="http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=1097343" title="Drag and drop into a running Eclipse to install Nodeclipse CoffeeScript Editor">
+  <img src="http://marketplace.eclipse.org/sites/all/modules/custom/marketplace/images/installbutton.png"/>
+</a>
 
-To start a headless build using maven, simply run `mvn` in the root of the project. 
+1. Get [Enide Studio](http://www.nodeclipse.org/enide/studio/) from <http://sourceforge.net/projects/nodeclipse/files/Enide-Studio/>
+or latest Eclipse Kepler from <http://www.eclipse.org/downloads/>.
+2. [Enide Studio](http://www.nodeclipse.org/enide/studio/) and [Eclipse IDE for Java and DSL Developers](http://www.eclipse.org/downloads/packages/eclipse-ide-java-and-dsl-developers/keplerr)
+both have required XText. Any Eclipse from <http://www.eclipse.org/downloads/> can actually download the dependency automatically.
+For Eclipse version before Kepler there is [quick installer on Marketplace](http://marketplace.eclipse.org/content/coffeescript-editor-quick-installer).
+3. Use drag-and-drop
+<a href="http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=1097343" title="Drag and drop into a running Eclipse to install Nodeclipse CoffeeScript Editor">
+  <img src="http://marketplace.eclipse.org/sites/all/modules/custom/marketplace/images/installbutton.png"/>
+</a>
+or update site `http://www.nodeclipse.org/coffeescript/repository/`
 
-## Install from sources
+ Below is original detailed instructions:
+ 
+#### Installation (old way 0.2.2) 
 
-1. `mvn package` or `mvn -o package` for offline re-build
+You will need an Eclipse instance with Xtext plugins.
+You can either install a complete Indigo distribution with Xtext,
+ or install the required plugins into your existing workspace.
+See [download Xtext 2.1][xtext_download] for details.
+
+The update site is: **`http://coffeescript-editor.eclipselabs.org.codespot.com/hg/`**
+So in Eclipse, perform these steps
+
+ - `Help -> Install New Software...` 
+ - `Add...`, then use this url as Location
+ - `Work with...`, and choose the location you just added
+ - Select `Coffeescript editor`
+ - `Next` and `Finish`
+
+You may be [given a warning](https://bitbucket.org/adamschmideg/coffeescript-eclipse/issue/6/),
+ but that won't affect the plugin.
+
+## Plans
+
+### 0.4 
+
+- make grouping and error warning as optional and disable by default (Reason: there are a lot of tiny problem, false error detection.
+ They are distracting developer.)
+
+## Changelog
+
+Check [devjournal.md](https://github.com/Nodeclipse/coffeescript-eclipse/blob/master/devjournal.md)
+
+- 0.3.0 refresh release
+	- switch to maven/tycho build
+	- coffee icon
+
+<dl>
+  <dt>0.2.2</dt>
+  <dd>Embed coffeescript in a DSL (see the `example` directory)</dd>
+  <dt>Planned next release</dt>
+  <dd>Integrated build: convert coffee code to javascript, and run it</dd>
+</dl>
+
+## Building
+
+### Maven build
+
+[Maven](http://maven.apache.org/) build (using [Tycho plugin](http://eclipse.org/tycho/)) is headless build, that doesn't require Eclipse.
+
+From base folder just run `mvn package`. Run offline when to re-build `mvn clean package -o`. 
+
+#### Install site.zip (quick and simple way)
+
+1. Locate zip file under `org.nodeclipse.site\target` in Project Explorer, StartExplore-> Copy Resource Path to Clipboard
+2. Help -> Install New Software ...
+3. <kbd>Add...</kbd>
+4. <kbd>Archive...</kbd>
+5. Insert copied string into name and path.  
+ E.g. `C:\Users\pverest\git\nodeclipse-056\org.nodeclipse.site\target\org.nodeclipse.site-0.5.0-SNAPSHOT.zip`
+ 
+For the next time just select the zip entry from Work With drop-down list. 
+
+#### Install from freshly built p2 repository (cool and long way)
+
+1. `mvn package` or `mvn package -o` for re-build offline
 2. `npm install http-server -g`  
 3. `http-server csep.site\target\repository -p 8010`
 4. // start http://localhost:8010/  
@@ -139,28 +192,6 @@ If you want to contribute to the plugin, here's a quick overview how to setup an
 
 After these 5 steps, the project should build without errors and you can startup a new eclipse instance and open any .coffee file using the coffeescript editor.
 
-
-### Installation  (old way 0.2.2)
-
-There is [quick installer on Marketplace](http://marketplace.eclipse.org/content/coffeescript-editor-quick-installer).
- Below is original details instructions:
-
-You will need an Eclipse instance with Xtext plugins.
-You can either install a complete Indigo distribution with Xtext,
- or install the required plugins into your existing workspace.
-See [download Xtext 2.1][xtext_download] for details.
-
-The update site is: **`http://coffeescript-editor.eclipselabs.org.codespot.com/hg/`**
-So in Eclipse, perform these steps
-
- - `Help -> Install New Software...` 
- - `Add...`, then use this url as Location
- - `Work with...`, and choose the location you just added
- - Select `Coffeescript editor`
- - `Next` and `Finish`
-
-You may be [given a warning](https://bitbucket.org/adamschmideg/coffeescript-eclipse/issue/6/),
- but that won't affect the plugin.
 
   [coffeescript]: http://www.coffeescript.org
   [xtext]: http://www.xtext.org
