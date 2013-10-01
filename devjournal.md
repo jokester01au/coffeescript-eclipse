@@ -74,7 +74,7 @@ See [Convert Antlr grammar to Xtext][6]
 
 ### Running headless with make
 
-  * I'm going to abandod this because eclipse packages are versioned with a build date too which is difficult to handle in a Makefile.
+  * I'm going to abandon this because eclipse packages are versioned with a build date too which is difficult to handle in a Makefile.
   * Possible (and time-consuming) solutions are
     * use some dependency management tool, such as ivy
     * do some bash scripting magic to find foo-[version]-v[build-date].jar and copy it as foo-[version].jar
@@ -686,7 +686,7 @@ Then update `csep.site\category.xml` manually
 
 Found on [StackOverflow](http://stackoverflow.com/questions/2848687/how-to-keep-plug-in-manifest-version-and-pom-version-in-sync-in-maven-with-tycho)
 
-See alos <https://issues.sonatype.org/browse/TYCHO-214> OSGi release procedures and best practices 
+See also <https://issues.sonatype.org/browse/TYCHO-214> OSGi release procedures and best practices 
 open as of 2013-09-01
 
 ### Travis CI
