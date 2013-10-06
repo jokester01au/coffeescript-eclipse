@@ -1,4 +1,3 @@
-
 # CoffeeScript Eclipse Plugin
 
 [![Build Status](https://secure.travis-ci.org/Nodeclipse/coffeescript-eclipse.png)](http://travis-ci.org/Nodeclipse/coffeescript-eclipse)
@@ -38,6 +37,8 @@ Old issues <https://github.com/adamschmideg/coffeescript-eclipse/issues?state=op
 
 If you reference any issues in this repository add "Nodeclipse#", otherwise GitHub searches
  in <https://github.com/adamschmideg/coffeescript-eclipse> repository.
+ 
+Post in Eclipse XText forum [XText based CoffeeScript Editor project is looking for new owner](http://www.eclipse.org/forums/index.php/mv/msg/541004/1127312/#msg_1127312)
 
 ## Details
 
