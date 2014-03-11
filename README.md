@@ -131,9 +131,7 @@ So in Eclipse, perform these steps
 You may be [given a warning](https://bitbucket.org/adamschmideg/coffeescript-eclipse/issue/6/),
  but that won't affect the plugin.
 
-## Plans
-
-### 0.4 
+## TODO
 
 - make grouping and error warning as optional and disable by default (Reason: there are a lot of tiny problem, false error detection.
  They are distracting developer.)
@@ -142,6 +140,7 @@ You may be [given a warning](https://bitbucket.org/adamschmideg/coffeescript-ecl
 
 Check [devjournal.md](https://github.com/Nodeclipse/coffeescript-eclipse/blob/master/devjournal.md)
 
+- 0.4.0 Merged Pull Request from Matt Tucker ["When indenting, respect Eclipse editor preferences for tabs/spaces"](https://github.com/Nodeclipse/coffeescript-eclipse/pull/23)
 - 0.3.0 refresh release
 	- switch to maven/tycho build
 	- coffee icon
