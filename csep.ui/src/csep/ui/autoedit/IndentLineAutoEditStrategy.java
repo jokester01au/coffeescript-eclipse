@@ -1,5 +1,6 @@
 package csep.ui.autoedit;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DefaultIndentLineAutoEditStrategy;
 import org.eclipse.jface.text.DocumentCommand;
@@ -11,6 +12,8 @@ import csep.parser.Helper;
 
 public class IndentLineAutoEditStrategy extends
 		DefaultIndentLineAutoEditStrategy {
+
+	private static final String EDITORS_QUALIFIER = "org.eclipse.ui.editors";
 
 	/**
 	 * Start an indented block after certain lines
@@ -31,9 +34,20 @@ public class IndentLineAutoEditStrategy extends
 			int p = (c.offset == d.getLength() ? c.offset  - 1 : c.offset);
 			IRegion info= d.getLineInformationOfOffset(p);
 			String line = d.get(info.getOffset(), info.getLength());
-			if (Helper.isBlockContainer(line))
-				// TODO: get actual indentation string
-				c.text += "\t";
+			if (Helper.isBlockContainer(line)) {
+				if (Helper.isBlockContainer(line)) {
+					boolean spacesForTabs = Platform.getPreferencesService().getBoolean(EDITORS_QUALIFIER,
+					        "spacesForTabs", false, null);
+					if (spacesForTabs) {
+						int tabWidth = Platform.getPreferencesService().getInt(EDITORS_QUALIFIER, "tabWidth", 4, null);
+						for (int i = 0; i < tabWidth; i++) {
+							c.text += " ";
+						}
+					} else {
+						c.text += "\t";
+					}
+				}
+			}
 		}
 		catch (BadLocationException e) {
 			// do nothing
