@@ -5,11 +5,22 @@ package csep.ui.contentassist;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+
+import tern.eclipse.ide.core.IDETernProject;
+import tern.eclipse.ide.ui.contentassist.JSTernCompletionCollector;
+import tern.server.protocol.completions.TernCompletionsQuery;
 
 import com.google.inject.Inject;
 
@@ -38,6 +49,42 @@ public class CoffeeScriptProposalProvider extends AbstractCoffeeScriptProposalPr
 		}
 		for (String proposal: proposals) {
 			acceptor.accept(createCompletionProposal(proposal, context));
+		}
+	}
+	
+	@Override
+	public void createProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		super.createProposals(context, acceptor);
+
+		try {
+			IDocument document = context.getDocument();
+			IFile resource = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(context.getResource().getURI().toPlatformString(true)));
+			if (!IDETernProject.hasTernNature(resource.getProject())) {
+				return;
+			}
+			IDETernProject ternProject = IDETernProject.getTernProject(resource.getProject());
+
+			TernCompletionsQuery query = new TernCompletionsQuery(
+					ternProject.getFileManager().getFileName(resource),
+					context.getOffset());
+			query.setTypes(true);
+			query.setDocs(true);
+			query.setUrls(true);
+			query.setOrigins(true);
+			query.setCaseInsensitive(false);
+			query.setLineCharPositions(true);
+			query.setExpandWordForward(false);
+
+			int startOffset = context.getOffset();
+			List<ICompletionProposal> proposals = new LinkedList<ICompletionProposal>();
+			ternProject.request(query, resource, document,
+					startOffset, new JSTernCompletionCollector(
+							proposals, startOffset));
+			for (ICompletionProposal p : proposals) {
+				acceptor.accept(p);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
