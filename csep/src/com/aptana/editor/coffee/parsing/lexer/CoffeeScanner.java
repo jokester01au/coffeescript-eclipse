@@ -359,8 +359,8 @@ public class CoffeeScanner extends Scanner {
 			code = "\n" + code;
 			this.fOffsetCorrection -= 1;
 		}
-		code = code.replaceAll("\r", "").replaceFirst(
-				TRAILING_SPACES.pattern(), "");
+//		code = code.replaceAll("\r", "").replaceFirst(
+//				TRAILING_SPACES.pattern(), "");
 		this.fCode = code;
 		this.fLine = 0;
 		if (opts.containsKey("fLine")) {
